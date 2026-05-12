@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberPortfolio | Votre Nom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- PARTICLES -->
+<div id="particles"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">[<span>SYS</span>://PORTFOLIO]</a>
+  <ul class="nav-links">
+    <li><a href="#about">./about</a></li>
+    <li><a href="#skills">./skills</a></li>
+    <li><a href="#projects">./projects</a></li>
+    <li><a href="#certifications">./certs</a></li>
+    <li><a href="#contact">./contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb"></div>
+  <div>
+    <div class="hero-badge">▶ SYSTÈME EN LIGNE — ACCÈS AUTORISÉ</div>
+    <h1 class="hero-name">
+      <span class="line1">ABOUBACAR SIDIKI</span>
+      <span class="line2 glitch" data-text="NOM DE FAMILLE">DIOMANDE</span>
+    </h1>
+    <p class="hero-subtitle">// Étudiant 1ère année de Master Systèmes Réseaux & Sécurité</p>
+    <p class="typing-text">
+      <span id="typingOut"></span><span class="typing-cursor"></span>
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">▶ Voir mes projets</a>
+      <a href="#contact" class="btn btn-ghost">⬡ Me contacter</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-dot"></div>
+        <span class="stat-label">Statut :</span>
+        <span class="stat-value">Disponible pour stage</span>
+      </div>
+      <div class="stat-item">
+        <div class="stat-dot blue"></div>
+        <span class="stat-label">Localisation :</span>
+        <span class="stat-value">Marrakech, MA</span>
+      </div>
+      <div class="stat-item">
+        <div class="stat-dot red"></div>
+        <span class="stat-label">Niveau :</span>
+        <span class="stat-value">Bac+4</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">// 01 — PROFIL</span>
+      <h2 class="section-title">À PROPOS</h2>
+      <div class="section-line">
+        <div class="line-bar"></div>
+        <span class="line-text">WHO_AM_I.exe</span>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div class="reveal reveal-delay-1">
+        <div class="about-avatar-wrap">
+          <div class="about-avatar-frame">
+            <div class="corner-tl"></div>
+            <div class="avatar-placeholder">
+              <div class="avatar-icon">🛡️</div>
+              <div class="avatar-label">Ma PHOTO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-content reveal reveal-delay-2">
+        <p>Passionné par la <strong>sécurité des systèmes d'information</strong>, je suis étudiant en Licence Réseaux & Cybersécurité. J'explore l'univers de la sécurité offensive et défensive, des infrastructures réseau et de la protection des données.</p>
+        <p>Mon objectif : devenir un <strong>expert en cybersécurité</strong>, capable d'anticiper les menaces, d'analyser les vulnérabilités et de concevoir des architectures résilientes.</p>
+        <p>Je participe activement à des <strong>CTF (Capture The Flag)</strong> et je m'entraîne sur des plateformes comme TryHackMe et HackTheBox pour affûter mes compétences offensives.</p>
+        <div class="about-info-grid">
+          <div class="info-item"><span class="info-label">&gt;</span> Formation : Master</div>
+          <div class="info-item"><span class="info-label">&gt;</span> Option : SISR</div>
+          <div class="info-item"><span class="info-label">&gt;</span> Ville : Lyon</div>
+          <div class="info-item"><span class="info-label">&gt;</span> Dispo : Stage 2026</div>
+          <div class="info-item"><span class="info-label">&gt;</span> CTF : TryHackMe</div>
+          <div class="info-item"><span class="info-label">&gt;</span> Lang : HTML, CSS, Javascript, Python, Java, PHP, c, C++ Bash</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">// 02 — COMPÉTENCES</span>
+      <h2 class="section-title">ARSENAL</h2>
+      <div class="section-line">
+        <div class="line-bar"></div>
+        <span class="line-text">SKILLS_MATRIX.json</span>
+      </div>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal reveal-delay-1" style="--card-color: #00ff9f;">
+        <div class="skill-card-header">
+          <div class="skill-icon">🔐</div>
+          <div>
+            <div class="skill-card-title">Cybersécurité</div>
+            <div class="skill-card-sub">OFFENSIVE & DEFENSIVE</div>
+          </div>
+        </div>
+        <div class="skill-bars">
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Pentest / Audit</span><span class="skill-bar-pct">75%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="0.75" style="background:#00ff9f;box-shadow:0 0 8px #00ff9f;"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>SIEM / IDS</span><span class="skill-bar-pct">65%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="0.65" style="background:#00ff9f;box-shadow:0 0 8px #00ff9f;"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Cryptographie</span><span class="skill-bar-pct">60%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="0.60" style="background:#00ff9f;box-shadow:0 0 8px #00ff9f;"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>CTF / HackTheBox</span><span class="skill-bar-pct">70%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="0.70" style="background:#00ff9f;box-shadow:0 0 8px #00ff9f;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal reveal-delay-2" style="--card-color: #00d4ff;">
+        <div class="skill-card-header">
+          <div class="skill-icon">🌐</div>
+          <div>
+            <div class="skill-card-title">Réseaux</div>
+            <div class="skill-card-sub">INFRASTRUCTURE & PROTOCOLES</div>
+          </div>
+        </div>
+        <div class="skill-bars">
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>TCP/IP / OSI</span><span class="skill-bar-pct">85%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="0.85"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Cisco / Routage</span><span class="skill-bar-pct">70%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="0.70"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>VPN / Firewall</span><span class="skill-bar-pct">75%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="0.75"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Wireshark / Analyse</span><span class="skill-bar-pct">80%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="0.80"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal reveal-delay-3" style="--card-color: #b400ff;">
+        <div class="skill-card-header">
+          <div class="skill-icon">💻</div>
+          <div>
+            <div class="skill-card-title">Systèmes & Dev</div>
+            <div class="skill-card-sub">OS & SCRIPTING</div>
+          </div>
+        </div>
+        <div class="skill-bars">
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Linux / Kali</span><span class="skill-bar-pct">80%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="0.80" style="background:#b400ff;box-shadow:0 0 8px #b400ff;"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Python / Bash</span><span class="skill-bar-pct">70%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="0.70" style="background:#b400ff;box-shadow:0 0 8px #b400ff;"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Active Directory</span><span class="skill-bar-pct">65%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="0.65" style="background:#b400ff;box-shadow:0 0 8px #b400ff;"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Virtualisation</span><span class="skill-bar-pct">75%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="0.75" style="background:#b400ff;box-shadow:0 0 8px #b400ff;"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">// 03 — PROJETS</span>
+      <h2 class="section-title">OPÉRATIONS</h2>
+      <div class="section-line">
+        <div class="line-bar"></div>
+        <span class="line-text">CLASSIFIED_PROJECTS.db</span>
+      </div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-header">
+          <span class="project-num">// PROJ-001</span>
+          <span class="project-status status-complete">TERMINÉ</span>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Scanner de Vulnérabilités</h3>
+          <p class="project-desc">Outil Python automatisé pour scanner les ports ouverts, détecter les services exposés et générer un rapport de vulnérabilités sur un réseau cible.</p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Nmap</span>
+            <span class="tag">Socket</span>
+            <span class="tag">Pentest</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+            <a href="#" class="project-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-header">
+          <span class="project-num">// PROJ-002</span>
+          <span class="project-status status-active">EN COURS</span>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Lab Réseau Virtuel</h3>
+          <p class="project-desc">Infrastructure réseau simulée avec GNS3 : routage OSPF/BGP, VLAN, DMZ, IDS/IPS Snort, pfSense. Environnement de test pour scénarios d'attaque/défense.</p>
+          <div class="project-tags">
+            <span class="tag">GNS3</span>
+            <span class="tag">Cisco IOS</span>
+            <span class="tag">pfSense</span>
+            <span class="tag">Snort</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+            <a href="#" class="project-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Rapport
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-header">
+          <span class="project-num">// PROJ-003</span>
+          <span class="project-status status-wip">WIP</span>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Honeypot & Analyse</h3>
+          <p class="project-desc">Déploiement d'un honeypot Cowrie pour capturer et analyser les tentatives d'intrusion SSH/Telnet. Dashboard de visualisation des attaques en temps réel.</p>
+          <div class="project-tags">
+            <span class="tag">Cowrie</span>
+            <span class="tag">ELK Stack</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Bash</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">// 04 — CERTIFICATIONS</span>
+      <h2 class="section-title">BADGES</h2>
+      <div class="section-line">
+        <div class="line-bar"></div>
+        <span class="line-text">CREDENTIALS.pem</span>
+      </div>
+    </div>
+    <div class="certs-grid">
+
+      <div class="cert-card reveal reveal-delay-1" style="--cert-color: #00d4ff;">
+        <div class="cert-badge">🏆</div>
+        <div class="cert-org">CISCO</div>
+        <div class="cert-name">CCNA — Introduction to Networks</div>
+        <div class="cert-date">▶ 2024</div>
+      </div>
+
+      <div class="cert-card reveal reveal-delay-2" style="--cert-color: #00ff9f;">
+        <div class="cert-badge">🛡️</div>
+        <div class="cert-org">TRYHACKME</div>
+        <div class="cert-name">Pre-Security Path</div>
+        <div class="cert-date">▶ 2024</div>
+      </div>
+
+      <div class="cert-card reveal reveal-delay-3" style="--cert-color: #b400ff;">
+        <div class="cert-badge">⚡</div>
+        <div class="cert-org">GOOGLE</div>
+        <div class="cert-name">Cybersecurity Certificate</div>
+        <div class="cert-date">▶ 2024</div>
+      </div>
+
+      <div class="cert-card reveal reveal-delay-4" style="--cert-color: #ff003c;">
+        <div class="cert-badge">🔥</div>
+        <div class="cert-org">À OBTENIR</div>
+        <div class="cert-name">CompTIA Security+</div>
+        <div class="cert-date">▶ Objectif 2025</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">// 05 — CONTACT</span>
+      <h2 class="section-title">CONNEXION</h2>
+      <div class="section-line">
+        <div class="line-bar"></div>
+        <span class="line-text">ESTABLISH_LINK.sh</span>
+      </div>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal reveal-delay-1">
+        <p class="contact-intro">Vous cherchez un stagiaire motivé en cybersécurité / réseaux ? Ou juste envie d'échanger sur la sécu ? N'hésitez pas à initier une connexion.</p>
+        <div class="contact-links">
+          <a href="mailto:sidikidiomande00@gmail.com" class="contact-link">
+            <div class="contact-link-icon">✉</div>
+            <div class="contact-link-text">
+              <span class="contact-link-label">EMAIL</span>
+              <span class="contact-link-value">sidikidiomande00@gmail.com</span>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/aboubacar-sidiki-diomand%C3%A9-0834972a3/" class="contact-link" target="_blank">
+            <div class="contact-link-icon">in</div>
+            <div class="contact-link-text">
+              <span class="contact-link-label">LINKEDIN</span>
+              <span class="contact-link-value">https://www.linkedin.com/in/aboubacar-sidiki-diomand%C3%A9-0834972a3/</span>
+            </div>
+          </a>
+          <a href="https://github.com/SidHat7/" class="contact-link" target="_blank">
+            <div class="contact-link-icon">gh</div>
+            <div class="contact-link-text">
+              <span class="contact-link-label">GITHUB</span>
+              <span class="contact-link-value">https://github.com/SidHat7/</span>
+            </div>
+          </a>
+          <a href="https://tryhackme.com/p/votre-username" class="contact-link" target="_blank">
+            <div class="contact-link-icon">🎯</div>
+            <div class="contact-link-text">
+              <span class="contact-link-label">TRYHACKME</span>
+              <span class="contact-link-value">votre-username</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="contact-form">
+          <div class="form-group">
+            <label class="form-label">// NOM</label>
+            <input type="text" class="form-input" placeholder="Votre identifiant...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">// EMAIL</label>
+            <input type="email" class="form-input" placeholder="votre@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">// MESSAGE</label>
+            <textarea class="form-textarea" placeholder="Initiez la communication..."></textarea>
+          </div>
+          <button class="form-submit">▶ ENVOYER LE MESSAGE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2025 <span>Aboubacar Sidiki Diomandé</span> — All systems operational</div>
+  <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">BUILD_v1.0 | SECURE_MODE: ON</div>
+</footer>
+<script src="script.js"></script>
+
+</body>
+</html>
