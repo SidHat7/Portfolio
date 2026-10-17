@@ -18,7 +18,7 @@
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --radius: 12px;
   --radius-sm: 8px;
-  --max: 1120px;
+  --max: 1240px;
   --header-h: 64px;
 }
 
@@ -129,7 +129,7 @@ strong { color: var(--text); font-weight: 600; }
 /* ───────── Sections ───────── */
 .section { padding: clamp(3.5rem, 8vw, 6rem) 0; }
 .section-alt { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.section-head { margin-bottom: 2.25rem; max-width: 70ch; }
+.section-head { margin-bottom: 2.25rem; max-width: 80ch; }
 .section-tag { font-family: var(--mono); font-size: .85rem; color: var(--accent); margin-bottom: .5rem; }
 .section-head h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); line-height: 1.2; letter-spacing: -0.01em; }
 .section-sub { color: var(--muted); margin-top: .6rem; }
@@ -348,3 +348,22 @@ a.cert:hover { border-color: var(--accent-line); transform: translateY(-2px); }
 
 .section-last { margin-bottom: clamp(3rem, 7vw, 5rem); }
 .nav-links a[aria-current="page"] { color: var(--text); background: var(--surface); }
+
+/* ───────── Grands écrans ───────── */
+@media (min-width: 1440px) {
+  :root { --max: 92vw; }
+  .container { padding: 0 40px; }
+}
+@media (min-width: 1680px) {
+  :root { --max: min(92vw, 1840px); }
+  html { font-size: 106.25%; }
+  .hero-photo { max-width: 380px; }
+  .skills-grid { grid-template-columns: repeat(4, 1fr); }
+  .projects-grid { grid-template-columns: repeat(3, 1fr); }
+  .certs-grid { grid-template-columns: repeat(5, 1fr); }
+}
+@media (min-width: 2200px) {
+  :root { --max: min(90vw, 2200px); }
+  html { font-size: 112.5%; }
+  .hero-photo { max-width: 420px; }
+}
