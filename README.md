@@ -1,4 +1,4 @@
-# Portfolio — Aboubacar Sidiki Diomandé
+# Portfolio  Aboubacar Sidiki Diomandé
 
 Site personnel (cybersécurité défensive, réseaux & systèmes) publié sur GitHub Pages :
 https://sidhat7.github.io/Portfolio/
