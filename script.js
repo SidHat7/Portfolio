@@ -1,95 +1,226 @@
+(function () {
+  'use strict';
 
-  // ── TYPING ANIMATION ──
-  const phrases = [
-    'Ethical Hacker en formation...',
-    'Passionné de Cybersécurité...',
-    'Analyste Réseau junior...',
-    'CTF Player / TryHackMe...',
-    'Always learning, always hacking...'
-  ];
-  let pIdx = 0, cIdx = 0, deleting = false;
-  const typingEl = document.getElementById('typingOut');
+  /* ── Menu mobile ── */
+  const toggle = document.querySelector('.nav-toggle');
+  const menu = document.getElementById('nav-menu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.setAttribute('aria-label', open ? 'Ouvrir le menu' : 'Fermer le menu');
+      menu.classList.toggle('open', !open);
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Ouvrir le menu');
+      menu.classList.remove('open');
+    }));
+  }
 
-  function type() {
-    const phrase = phrases[pIdx];
-    if (!deleting) {
-      typingEl.textContent = phrase.slice(0, ++cIdx);
-      if (cIdx === phrase.length) { deleting = true; setTimeout(type, 2000); return; }
-    } else {
-      typingEl.textContent = phrase.slice(0, --cIdx);
-      if (cIdx === 0) { deleting = false; pIdx = (pIdx + 1) % phrases.length; }
+  /* ── Bouton CV : affiché seulement si le PDF existe ── */
+  const cvBtn = document.getElementById('cv-btn');
+  if (cvBtn) {
+    fetch(cvBtn.getAttribute('href'), { method: 'HEAD' })
+      .then(r => { if (r.ok) cvBtn.hidden = false; })
+      .catch(() => {});
+  }
+
+  /* ── Projets ── */
+  const PROJECTS = window.PROJECTS || [];
+  const CATS = window.PROJECT_CATS || {};
+
+  function el(tag, cls, text) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  function card(p) {
+    const btn = el('button', 'project-card reveal');
+    btn.type = 'button';
+    btn.dataset.cats = p.cats.join(' ');
+    btn.setAttribute('aria-haspopup', 'dialog');
+    const cats = el('div', 'pc-cats');
+    p.cats.forEach(c => cats.appendChild(el('span', 'pc-cat', CATS[c] || c)));
+    btn.appendChild(cats);
+    btn.appendChild(el('h3', 'pc-title', p.title));
+    btn.appendChild(el('p', 'pc-summary', p.summary));
+    const tags = el('ul', 'tag-list tag-list-sm');
+    p.tags.slice(0, 5).forEach(t => tags.appendChild(el('li', '', t)));
+    btn.appendChild(tags);
+    btn.appendChild(el('span', 'pc-more', 'Voir le détail →'));
+    btn.addEventListener('click', () => openProject(p));
+    return btn;
+  }
+
+  /* Modale (élément <dialog>) */
+  let dialog = null;
+  function ensureDialog() {
+    if (dialog) return dialog;
+    dialog = el('dialog', 'project-dialog');
+    dialog.setAttribute('aria-labelledby', 'pd-title');
+    dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+    dialog.addEventListener('close', () => document.body.classList.remove('no-scroll'));
+    document.body.appendChild(dialog);
+    return dialog;
+  }
+
+  function diagram() {
+    const wrap = el('figure', 'pd-diagram');
+    const steps = [
+      ['Sources', 'Réseau · hôtes · services'],
+      ['Collecte', 'Snort · AIDE · Nagios'],
+      ['Corrélation', 'SIEM OSSIM'],
+      ['Réponse', 'Alertes · analyse · remédiation']
+    ];
+    const flow = el('ol', 'flow');
+    steps.forEach(([t, d]) => {
+      const li = el('li');
+      li.appendChild(el('strong', '', t));
+      li.appendChild(el('span', '', d));
+      flow.appendChild(li);
+    });
+    wrap.appendChild(flow);
+    wrap.appendChild(el('figcaption', '', 'Architecture de la chaîne de détection'));
+    return wrap;
+  }
+
+  function openProject(p) {
+    const d = ensureDialog();
+    d.replaceChildren();
+    const head = el('div', 'pd-head');
+    head.appendChild(el('p', 'pd-context', p.context));
+    const close = el('button', 'pd-close', '✕');
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Fermer');
+    close.addEventListener('click', () => d.close());
+    head.appendChild(close);
+    d.appendChild(head);
+
+    const body = el('div', 'pd-body');
+    const h = el('h2', 'pd-title', p.title);
+    h.id = 'pd-title';
+    body.appendChild(h);
+    body.appendChild(el('p', 'pd-summary', p.summary));
+    if (p.diagram) body.appendChild(diagram());
+    body.appendChild(el('h3', 'pd-sub', 'Ce que j\'ai réalisé'));
+    const ul = el('ul', 'pd-list');
+    p.did.forEach(x => ul.appendChild(el('li', '', x)));
+    body.appendChild(ul);
+    if (p.parts && p.parts.length) {
+      body.appendChild(el('h3', 'pd-sub', 'Ateliers regroupés'));
+      const parts = el('ul', 'tag-list tag-list-outline');
+      p.parts.forEach(x => parts.appendChild(el('li', '', x)));
+      body.appendChild(parts);
     }
-    setTimeout(type, deleting ? 50 : 80);
-  }
-  type();
-
-  // ── PARTICLES ──
-  const pContainer = document.getElementById('particles');
-  for (let i = 0; i < 30; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const size = Math.random() * 3 + 1;
-    p.style.cssText = `
-      left: ${Math.random() * 100}%;
-      width: ${size}px;
-      height: ${size}px;
-      animation-duration: ${Math.random() * 15 + 8}s;
-      animation-delay: ${Math.random() * 10}s;
-      --dx: ${(Math.random() - 0.5) * 200}px;
-      opacity: ${Math.random() * 0.6 + 0.2};
-      ${Math.random() > 0.5 ? 'background:#00ff9f;box-shadow:0 0 4px #00ff9f;' : ''}
-    `;
-    pContainer.appendChild(p);
+    body.appendChild(el('h3', 'pd-sub', 'Technologies'));
+    const tags = el('ul', 'tag-list');
+    p.tags.forEach(t => tags.appendChild(el('li', '', t)));
+    body.appendChild(tags);
+    if (p.repo) {
+      const a = el('a', 'btn btn-ghost pd-repo', 'Voir le dépôt GitHub ↗');
+      a.href = p.repo; a.target = '_blank'; a.rel = 'noopener';
+      body.appendChild(a);
+    }
+    d.appendChild(body);
+    document.body.classList.add('no-scroll');
+    d.showModal();
+    close.focus();
   }
 
-  // ── SCROLL PROGRESS BAR ──
-  window.addEventListener('scroll', () => {
-    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    document.getElementById('progressBar').style.width = (pct * 100) + '%';
-  });
+  // Accueil : projets phares
+  const featured = document.getElementById('featured-projects');
+  if (featured) {
+    const limit = parseInt(featured.dataset.limit, 10) || 3;
+    PROJECTS.filter(p => p.featured).slice(0, limit).forEach(p => featured.appendChild(card(p)));
+  }
 
-  // ── REVEAL ON SCROLL ──
+  // Page projets
+  const mainGrid = document.getElementById('projects-main');
+  const otherGrid = document.getElementById('projects-other');
+  const filters = document.getElementById('filters');
+  if (mainGrid && otherGrid) {
+    PROJECTS.forEach(p => (p.featured ? mainGrid : otherGrid).appendChild(card(p)));
+    document.getElementById('count-main').textContent = PROJECTS.filter(p => p.featured).length;
+    document.getElementById('count-other').textContent = PROJECTS.filter(p => !p.featured).length;
+  }
+  if (filters) {
+    const all = el('button', 'filter is-active', 'Tous');
+    all.type = 'button'; all.dataset.cat = 'all';
+    all.setAttribute('aria-pressed', 'true');
+    filters.appendChild(all);
+    Object.entries(CATS).forEach(([k, v]) => {
+      const b = el('button', 'filter', v);
+      b.type = 'button'; b.dataset.cat = k;
+      b.setAttribute('aria-pressed', 'false');
+      filters.appendChild(b);
+    });
+    filters.addEventListener('click', e => {
+      const b = e.target.closest('.filter');
+      if (!b) return;
+      filters.querySelectorAll('.filter').forEach(f => {
+        const on = f === b;
+        f.classList.toggle('is-active', on);
+        f.setAttribute('aria-pressed', String(on));
+      });
+      const cat = b.dataset.cat;
+      document.querySelectorAll('.project-card').forEach(c => {
+        c.hidden = !(cat === 'all' || c.dataset.cats.split(' ').includes(cat));
+      });
+      document.querySelectorAll('.projects-block').forEach(block => {
+        block.hidden = !block.querySelector('.project-card:not([hidden])');
+      });
+    });
+  }
+
+  /* ── Apparition au défilement ── */
   const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  reveals.forEach(r => observer.observe(r));
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const obs = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    }), { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(r => obs.observe(r));
+  } else {
+    reveals.forEach(r => r.classList.add('visible'));
+  }
 
-  // ── SKILL BARS ──
-  const barObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const fills = e.target.querySelectorAll('.skill-bar-fill');
-        fills.forEach(f => {
-          const pct = f.dataset.pct;
-          f.style.setProperty('--pct', pct);
-          f.style.transform = `scaleX(${pct})`;
-          f.classList.add('animated');
+  /* ── Formulaire de contact (Formspree) ── */
+  const form = document.getElementById('contact-form');
+  if (form) {
+    const btn = document.getElementById('cf-btn');
+    const status = document.getElementById('cf-status');
+    const label = btn.textContent;
+    const setStatus = (msg, type) => { status.textContent = msg; status.dataset.type = type || ''; };
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const f = form.elements;
+      const name = f.namedItem('name').value.trim();
+      const email = f.namedItem('email').value.trim();
+      const message = f.namedItem('message').value.trim();
+      if (!name || !email || !message) { setStatus('Merci de remplir tous les champs.', 'error'); return; }
+      if (!f.namedItem('email').checkValidity()) { setStatus('Adresse email invalide.', 'error'); return; }
+
+      btn.disabled = true;
+      btn.textContent = 'Envoi en cours…';
+      setStatus('');
+      try {
+        const r = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message })
         });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        form.reset();
+        setStatus('Message envoyé, merci ! Je vous réponds rapidement.', 'ok');
+      } catch (err) {
+        setStatus("L'envoi a échoué. Écrivez-moi directement à sidikdiomande00@gmail.com.", 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = label;
       }
     });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('.skill-card').forEach(c => barObserver.observe(c));
-
-  // ── CARD MOUSE GLOW ──
-  document.querySelectorAll('.skill-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const rect = card.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      card.style.setProperty('--mx', x + '%');
-      card.style.setProperty('--my', y + '%');
-    });
-  });
-
-  // ── FORM ──
-  document.querySelector('.form-submit').addEventListener('click', function() {
-    this.textContent = '✓ MESSAGE ENVOYÉ';
-    this.style.color = '#00ff9f';
-    this.style.borderColor = '#00ff9f';
-    setTimeout(() => {
-      this.textContent = '▶ ENVOYER LE MESSAGE';
-      this.style.color = '';
-      this.style.borderColor = '';
-    }, 3000);
-  });
+  }
+})();
