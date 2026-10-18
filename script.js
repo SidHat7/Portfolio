@@ -264,7 +264,7 @@
         form.reset();
         setStatus('Message envoyé, merci ! Je vous réponds rapidement.', 'ok');
       } catch (err) {
-        setStatus("L'envoi a échoué. Écrivez-moi directement à sidikdiomande00@gmail.com.", 'error');
+        setStatus("L'envoi a échoué. Écrivez-moi directement à diomande.sidiki.it@gmail.com.", 'error');
       } finally {
         btn.disabled = false;
         btn.textContent = label;
