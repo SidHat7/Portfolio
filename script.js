@@ -18,12 +18,25 @@
     }));
   }
 
-  /* ── Bouton CV : affiché seulement si le PDF existe ── */
-  const cvBtn = document.getElementById('cv-btn');
-  if (cvBtn) {
-    fetch(cvBtn.getAttribute('href'), { method: 'HEAD' })
-      .then(r => { if (r.ok) cvBtn.hidden = false; })
-      .catch(() => {});
+  /* ── Page CV : bouton actif seulement si le PDF existe ── */
+  const cvActions = document.getElementById('cv-actions');
+  if (cvActions) {
+    const pdf = document.getElementById('cv-download').getAttribute('href');
+    const missing = () => {
+      cvActions.hidden = true;
+      document.getElementById('cv-missing').hidden = false;
+    };
+    fetch(pdf, { method: 'HEAD', cache: 'no-store' })
+      .then(r => {
+        if (!r.ok) return missing();
+        const preview = document.getElementById('cv-preview');
+        const frame = preview.querySelector('iframe');
+        if (matchMedia('(min-width: 901px)').matches) {
+          frame.src = frame.dataset.src;
+          preview.hidden = false;
+        }
+      })
+      .catch(missing);
   }
 
   /* ── Projets ── */
