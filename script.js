@@ -18,25 +18,60 @@
     }));
   }
 
-  /* ── Page CV : bouton actif seulement si le PDF existe ── */
-  const cvActions = document.getElementById('cv-actions');
-  if (cvActions) {
-    const pdf = document.getElementById('cv-download').getAttribute('href');
-    const missing = () => {
-      cvActions.hidden = true;
-      document.getElementById('cv-missing').hidden = false;
+  /* ── Page CV : une carte par CV, boutons actifs seulement si le PDF existe ── */
+  const cvCards = document.querySelectorAll('.cv-card[data-file]');
+  if (cvCards.length) {
+    const preview = document.getElementById('cv-preview');
+    const frame = preview.querySelector('iframe');
+    const previewTitle = document.getElementById('cv-preview-title');
+    const wide = matchMedia('(min-width: 901px)');
+    let shown = false;
+
+    const showPreview = (card) => {
+      if (!wide.matches) return;
+      cvCards.forEach(c => c.classList.toggle('is-selected', c === card));
+      frame.src = card.dataset.file + '#view=FitH';
+      previewTitle.textContent = card.querySelector('h2').textContent;
+      preview.hidden = false;
     };
-    fetch(pdf, { method: 'HEAD', cache: 'no-store' })
-      .then(r => {
-        if (!r.ok) return missing();
-        const preview = document.getElementById('cv-preview');
-        const frame = preview.querySelector('iframe');
-        if (matchMedia('(min-width: 901px)').matches) {
-          frame.src = frame.dataset.src;
-          preview.hidden = false;
-        }
-      })
-      .catch(missing);
+
+    cvCards.forEach(card => {
+      const file = card.dataset.file;
+      const actions = document.createElement('div');
+      actions.className = 'cv-actions';
+      card.appendChild(actions);
+
+      fetch(file, { method: 'HEAD', cache: 'no-store' })
+        .then(r => { if (!r.ok) throw new Error(); })
+        .then(() => {
+          const dl = document.createElement('a');
+          dl.className = 'btn btn-primary';
+          dl.href = file;
+          dl.setAttribute('download', card.dataset.download);
+          dl.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>';
+          dl.appendChild(document.createTextNode(' Télécharger'));
+          const open = document.createElement('a');
+          open.className = 'btn btn-ghost';
+          open.href = file; open.target = '_blank'; open.rel = 'noopener';
+          open.textContent = 'Ouvrir ↗';
+          actions.append(dl, open);
+          if (wide.matches) {
+            const pv = document.createElement('button');
+            pv.type = 'button';
+            pv.className = 'btn btn-ghost';
+            pv.textContent = 'Aperçu';
+            pv.addEventListener('click', () => { showPreview(card); preview.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+            actions.appendChild(pv);
+          }
+          if (!shown && card.classList.contains('is-main')) { shown = true; showPreview(card); }
+        })
+        .catch(() => {
+          const p = document.createElement('p');
+          p.className = 'cv-missing';
+          p.textContent = 'Bientôt disponible.';
+          actions.appendChild(p);
+        });
+    });
   }
 
   /* ── Projets ── */
