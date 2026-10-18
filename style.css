@@ -1,3 +1,10 @@
+/* ───────── Polices (hébergées localement, licence SIL OFL 1.1) ───────── */
+@font-face { font-family: 'IBM Plex Sans'; src: url('assets/fonts/IBMPlexSans-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'IBM Plex Sans'; src: url('assets/fonts/IBMPlexSans-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'IBM Plex Sans'; src: url('assets/fonts/IBMPlexSans-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'IBM Plex Sans'; src: url('assets/fonts/IBMPlexSans-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-Variable.woff2') format('woff2'); font-weight: 100 800; font-style: normal; font-display: swap; }
+
 /* ───────── Thème ───────── */
 :root {
   --bg: #0b0f14;
@@ -391,3 +398,6 @@ a.cert:hover { border-color: var(--accent-line); transform: translateY(-2px); }
 .cv-preview iframe { display: block; width: 100%; height: min(1100px, calc(100vh - var(--header-h) - 100px)); border: 0; background: #fff; }
 @media (max-width: 1200px) { .cv-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .cv-grid { grid-template-columns: 1fr; } }
+
+/* Champ piège anti-spam (invisible pour les humains) */
+.hp-field { position: absolute !important; left: -10000px; width: 1px; height: 1px; overflow: hidden; }

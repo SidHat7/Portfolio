@@ -1,0 +1,7 @@
+# Politique de signalement de vulnérabilités — portfolio d'Aboubacar Sidiki Diomandé
+# Vous avez trouvé un problème de sécurité sur ce site ? Merci de me le signaler.
+Contact: https://sidhat7.github.io/Portfolio/#contact
+Contact: https://www.linkedin.com/in/aboubacar-sidiki-diomand%C3%A9-0834972a3/
+Expires: 2027-10-18T00:00:00.000Z
+Preferred-Languages: fr, en
+Canonical: https://sidhat7.github.io/Portfolio/.well-known/security.txt

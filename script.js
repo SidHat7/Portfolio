@@ -1,6 +1,27 @@
 (function () {
   'use strict';
 
+  /* ── Anti-clickjacking : le site ne doit pas être affiché dans un cadre étranger ── */
+  if (window.top !== window.self) {
+    try { window.top.location.replace(window.location.href); }
+    catch (e) { document.documentElement.innerHTML = ''; }
+    return;
+  }
+
+  /* ── Adresse email assemblée à l'affichage (non lisible par les robots) ── */
+  const rev = s => s.split('').reverse().join('');
+  const mailLink = document.querySelector('.js-mail');
+  let mailAddr = '';
+  if (mailLink) {
+    mailAddr = rev(mailLink.dataset.u) + '@' + rev(mailLink.dataset.d);
+    const reveal = () => {
+      mailLink.href = 'mailto:' + mailAddr;
+      mailLink.querySelector('.cl-value').textContent = mailAddr;
+    };
+    ['mouseenter', 'focus', 'touchstart'].forEach(ev => mailLink.addEventListener(ev, reveal, { once: true, passive: true }));
+    mailLink.addEventListener('click', reveal);
+  }
+
   /* ── Menu mobile ── */
   const toggle = document.querySelector('.nav-toggle');
   const menu = document.getElementById('nav-menu');
@@ -242,14 +263,19 @@
     const label = btn.textContent;
     const setStatus = (msg, type) => { status.textContent = msg; status.dataset.type = type || ''; };
 
+    let lastSent = 0;
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const f = form.elements;
       const name = f.namedItem('name').value.trim();
       const email = f.namedItem('email').value.trim();
       const message = f.namedItem('message').value.trim();
+      const gotcha = f.namedItem('_gotcha').value;
       if (!name || !email || !message) { setStatus('Merci de remplir tous les champs.', 'error'); return; }
       if (!f.namedItem('email').checkValidity()) { setStatus('Adresse email invalide.', 'error'); return; }
+      // Champ piège rempli = robot : on simule un succès sans rien envoyer
+      if (gotcha) { form.reset(); setStatus('Message envoyé, merci !', 'ok'); return; }
+      if (Date.now() - lastSent < 60000) { setStatus('Message déjà envoyé. Merci de patienter une minute avant un nouvel envoi.', 'error'); return; }
 
       btn.disabled = true;
       btn.textContent = 'Envoi en cours…';
@@ -258,13 +284,14 @@
         const r = await fetch(form.action, {
           method: 'POST',
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, message })
+          body: JSON.stringify({ name, email, message, _gotcha: gotcha })
         });
         if (!r.ok) throw new Error('HTTP ' + r.status);
+        lastSent = Date.now();
         form.reset();
         setStatus('Message envoyé, merci ! Je vous réponds rapidement.', 'ok');
       } catch (err) {
-        setStatus("L'envoi a échoué. Écrivez-moi directement à diomande.sidiki.it@gmail.com.", 'error');
+        setStatus("L'envoi a échoué. Réessayez plus tard ou passez par LinkedIn.", 'error');
       } finally {
         btn.disabled = false;
         btn.textContent = label;
