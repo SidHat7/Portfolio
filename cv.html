@@ -44,44 +44,40 @@
     <div class="container">
       <a href="index.html" class="back-link">← Retour à l'accueil</a>
       <p class="section-tag">Curriculum Vitae</p>
-      <h1>Mon CV</h1>
-      <p>Toutes mes informations sur une page : formation, compétences, projets et certifications. Disponible au format PDF.</p>
+      <h1>Mes CV</h1>
+      <p>Choisissez la version adaptée à votre offre. Chaque CV est disponible au format PDF.</p>
     </div>
   </section>
 
-  <div class="container cv-layout">
-    <aside class="cv-card">
-      <div class="cv-file">
-        <svg class="cv-icon" viewBox="0 0 48 60" aria-hidden="true">
-          <path d="M4 2h28l12 12v42a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-          <path d="M32 2v12h12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-          <path d="M11 28h26M11 36h26M11 44h16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-        <div>
-          <p class="cv-name">CV_Diomande.pdf</p>
-          <p class="cv-meta">Format PDF · Français</p>
-        </div>
-      </div>
-
-      <ul class="cv-highlights">
-        <li><span>Formation</span>Master 1 Informatique — Université Lyon 1</li>
-        <li><span>Domaine</span>Cybersécurité défensive · Réseaux · Systèmes</li>
-        <li><span>Recherche</span>Stage été 2027 · Alternance 2027–2028</li>
-        <li><span>Localisation</span>Lyon, France</li>
-      </ul>
-
-      <div class="cv-actions" id="cv-actions">
-        <a href="assets/CV_Diomande.pdf" class="btn btn-primary" id="cv-download" download="CV_Aboubacar_Sidiki_Diomande.pdf">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
-          Télécharger mon CV
-        </a>
-        <a href="assets/CV_Diomande.pdf" class="btn btn-ghost" id="cv-open" target="_blank" rel="noopener">Ouvrir dans un onglet ↗</a>
-      </div>
-      <p class="cv-missing" id="cv-missing" hidden>Le CV est en cours de mise à jour. En attendant, vous pouvez me le demander directement <a href="index.html#contact">via le formulaire de contact</a>.</p>
-    </aside>
+  <div class="container cv-page">
+    <div class="cv-grid">
+      <article class="cv-card is-main" data-file="assets/cv/CV_Cybersecurite.pdf" data-download="CV_Cybersecurite_Aboubacar_Sidiki_Diomande.pdf">
+        <p class="cv-badge">Stage & alternance</p>
+        <h2>Cybersécurité · Réseaux & Systèmes</h2>
+        <p class="cv-desc">Stage été 2027 et alternance 2027–2028 : détection, SIEM, PKI, VPN, sécurisation réseau.</p>
+      </article>
+      <article class="cv-card" data-file="assets/cv/CV_Agent_Securite.pdf" data-download="CV_Agent_Securite_Aboubacar_Sidiki_Diomande.pdf">
+        <p class="cv-badge">Emploi</p>
+        <h2>Agent de sécurité</h2>
+        <p class="cv-desc">Postes d'agent de sécurité et de surveillance, compatibles avec mes études.</p>
+      </article>
+      <article class="cv-card" data-file="assets/cv/CV_Job_Etudiant.pdf" data-download="CV_Job_Etudiant_Aboubacar_Sidiki_Diomande.pdf">
+        <p class="cv-badge">Emploi</p>
+        <h2>Job étudiant</h2>
+        <p class="cv-desc">Emploi à temps partiel à Lyon, en parallèle de mon Master.</p>
+      </article>
+      <article class="cv-card" data-file="assets/cv/CV_Interim.pdf" data-download="CV_Interim_Aboubacar_Sidiki_Diomande.pdf">
+        <p class="cv-badge">Emploi</p>
+        <h2>Intérim</h2>
+        <p class="cv-desc">Missions d'intérim : manutention, logistique, restauration.</p>
+      </article>
+    </div>
 
     <section class="cv-preview" id="cv-preview" aria-label="Aperçu du CV" hidden>
-      <iframe src="about:blank" data-src="assets/CV_Diomande.pdf#view=FitH" title="Aperçu du CV d'Aboubacar Sidiki Diomandé" loading="lazy"></iframe>
+      <div class="cv-preview-head">
+        <p>Aperçu : <strong id="cv-preview-title"></strong></p>
+      </div>
+      <iframe src="about:blank" title="Aperçu du CV" loading="lazy"></iframe>
     </section>
   </div>
 </main>
