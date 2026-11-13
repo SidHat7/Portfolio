@@ -244,15 +244,119 @@
     });
   }
 
-  /* ── Apparition au défilement ── */
+  /* ═════════ Effets visuels ═════════ */
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  /* Apparition au défilement, échelonnée dans chaque grille */
   const reveals = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    document.querySelectorAll('.skills-grid, .projects-grid, .certs-grid, .cv-grid, .grid-2').forEach(grid => {
+      [...grid.children].filter(c => c.classList.contains('reveal'))
+        .forEach((c, i) => c.style.setProperty('--d', Math.min(i, 8) * 70 + 'ms'));
+    });
     const obs = new IntersectionObserver(entries => entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      if (!e.isIntersecting) return;
+      const t = e.target;
+      t.classList.add('visible');
+      obs.unobserve(t);
+      // le délai ne sert qu'à l'apparition : on le retire pour que les survols restent instantanés
+      setTimeout(() => t.style.removeProperty('--d'), 1200);
     }), { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     reveals.forEach(r => obs.observe(r));
   } else {
     reveals.forEach(r => r.classList.add('visible'));
+  }
+
+  /* Barre de progression de lecture */
+  const bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+  let ticking = false;
+  const updateBar = () => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(scrollY / h, 1) : 0) + ')';
+    ticking = false;
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(updateBar); } }, { passive: true });
+  updateBar();
+
+  /* Lien de navigation actif selon la section visible (accueil) */
+  const navMap = new Map();
+  document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
+    const sec = document.getElementById(a.getAttribute('href').slice(1));
+    if (sec) navMap.set(sec, a);
+  });
+  if (navMap.size && 'IntersectionObserver' in window) {
+    const navObs = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      navMap.forEach(a => a.classList.remove('is-active'));
+      navMap.get(e.target).classList.add('is-active');
+    }), { rootMargin: '-45% 0px -50% 0px' });
+    navMap.forEach((_, sec) => navObs.observe(sec));
+  }
+
+  /* Projecteur qui suit la souris (cartes + fond du hero) */
+  if (finePointer) {
+    const spotSel = '.card:not(.card-flat), .skill-group, .project-card, .cert, .cv-card, .contact-links a, .contact-form';
+    const track = (el, e) => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    };
+    document.addEventListener('pointermove', e => {
+      const el = e.target.closest && e.target.closest(spotSel);
+      if (el) { el.classList.add('fx-spot'); track(el, e); }
+    }, { passive: true });
+    document.querySelectorAll(spotSel).forEach(el => el.classList.add('fx-spot'));
+
+    const hero = document.querySelector('.hero');
+    const heroBg = document.querySelector('.hero-bg');
+    if (hero && heroBg && !reduceMotion) {
+      hero.addEventListener('pointermove', e => track(heroBg, e), { passive: true });
+    }
+  }
+
+  /* Titre : effet « déchiffrement » (une seule fois) */
+  const scr = document.querySelector('.js-scramble');
+  if (scr && !reduceMotion) {
+    const glyphs = '01<>/{}[]#$%&*+=?ABCDEFabcdef';
+    const nodes = [];
+    const walk = n => n.nodeType === 3 ? (n.textContent.trim() && nodes.push(n)) : n.childNodes.forEach(walk);
+    walk(scr);
+    const finals = nodes.map(n => n.textContent);
+    const total = finals.join('').length;
+    const start = performance.now();
+    const dur = 900;
+    scr.classList.add('is-decoding');
+    const frame = now => {
+      const progress = Math.min((now - start) / dur, 1);
+      const revealed = Math.floor(progress * total);
+      let k = 0;
+      nodes.forEach((n, i) => {
+        n.textContent = [...finals[i]].map(ch => {
+          const out = (k < revealed || ch === ' ') ? ch : glyphs[(Math.random() * glyphs.length) | 0];
+          k++;
+          return out;
+        }).join('');
+      });
+      if (progress < 1) requestAnimationFrame(frame);
+      else { nodes.forEach((n, i) => { n.textContent = finals[i]; }); scr.classList.remove('is-decoding'); }
+    };
+    requestAnimationFrame(frame);
+  }
+
+  /* Sous-titre tapé façon terminal (une seule fois) */
+  const typed = document.querySelector('.js-type .type-text');
+  if (typed && !reduceMotion) {
+    const full = typed.textContent;
+    typed.textContent = '';
+    let i = 0;
+    setTimeout(function step() {
+      typed.textContent = full.slice(0, ++i);
+      if (i < full.length) setTimeout(step, full[i - 1] === ' ' ? 20 : 32);
+    }, 650);
   }
 
   /* ── Formulaire de contact (Formspree) ── */

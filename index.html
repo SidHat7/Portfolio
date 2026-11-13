@@ -46,11 +46,12 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="container hero-grid">
     <div class="hero-text">
       <p class="eyebrow"><span class="prompt">$</span> whoami</p>
-      <h1>Aboubacar Sidiki <span class="accent">Diomandé</span></h1>
-      <p class="hero-role">Cybersécurité défensive · Réseaux · Systèmes</p>
+      <h1 class="js-scramble" aria-label="Aboubacar Sidiki Diomandé"><span aria-hidden="true">Aboubacar Sidiki <span class="accent">Diomandé</span></span></h1>
+      <p class="hero-role js-type" aria-label="Cybersécurité défensive · Réseaux · Systèmes"><span class="type-text" aria-hidden="true">Cybersécurité défensive · Réseaux · Systèmes</span><span class="caret" aria-hidden="true"></span></p>
       <p class="hero-lead">Étudiant en <strong>Master 1 Informatique à l'Université Claude Bernard Lyon 1</strong>, je conçois, sécurise et supervise des infrastructures : détection d'intrusion, SIEM, PKI, VPN et durcissement de systèmes Linux.</p>
       <ul class="hero-chips" aria-label="Disponibilités">
         <li><span class="dot"></span>Stage été 2027</li>
@@ -64,7 +65,9 @@
       </div>
     </div>
     <figure class="hero-photo">
-      <img src="assets/photo.jpg" alt="Portrait d'Aboubacar Sidiki Diomandé" width="480" height="600">
+      <div class="photo-frame">
+        <img src="assets/photo.jpg" alt="Portrait d'Aboubacar Sidiki Diomandé" width="480" height="600">
+      </div>
       <figcaption><span class="prompt">></span> M1 Info · Lyon 1 · M2 SRS visé</figcaption>
     </figure>
   </div>
