@@ -22,6 +22,23 @@ window.PROJECTS = [
     parts: ['Snort — IDS réseau', 'AIDE — IDS hôte', 'Nagios — supervision', 'OSSIM — SIEM', 'Nessus — vulnérabilités']
   },
   {
+    id: 'homelab',
+    featured: true,
+    title: 'Homelab : réseau d\'entreprise sur 2 sites',
+    cats: ['reseau'],
+    context: 'Projet personnel · Cisco IOS',
+    summary: "Conception et configuration complète du réseau d'une entreprise répartie sur deux sites, de la segmentation à l'accès Internet.",
+    did: [
+      "Segmentation en 6 VLAN et routage inter-VLAN, à la fois par switch de niveau 3 et en router-on-a-stick",
+      "DHCP centralisé et relayé vers les VLAN des deux sites",
+      "Routage dynamique OSPF entre les sites",
+      "Accès Internet par NAT/PAT",
+      "Configurations et tests de validation documentés"
+    ],
+    tags: ['Cisco IOS', 'VLAN', '802.1Q', 'Inter-VLAN', 'DHCP relay', 'OSPF', 'NAT/PAT'],
+    parts: []
+  },
+  {
     id: 'pki',
     featured: true,
     title: 'PKI interne & cryptographie appliquée',
@@ -79,12 +96,13 @@ window.PROJECTS = [
     context: 'Licence 3 · Modules Réseaux et Sécurité réseau',
     summary: "Conception de topologies segmentées et filtrage du trafic, côté équipements Cisco comme côté pare-feu Linux.",
     did: [
-      "Topologies Cisco Packet Tracer : VLAN, routage inter-VLAN, DHCP (Windows Server et Linux), routage dynamique",
+      "Topologies Cisco Packet Tracer : VLAN, VTP et trunks 802.1Q, routage inter-VLAN, DHCP (Windows Server et Linux)",
+      "Découpage d'adressage VLSM et OSPF multi-sites avec diffusion d'une route par défaut",
       "ACL Cisco standard et étendues (source, destination, port, protocole), placement sur les interfaces et tests de validation",
       "Pare-feu Netfilter/iptables : politiques de filtrage INPUT, OUTPUT et FORWARD, suivi de connexions, NAT (MASQUERADE, DNAT, SNAT)"
     ],
-    tags: ['Cisco IOS', 'Packet Tracer', 'VLAN', 'DHCP', 'ACL', 'iptables', 'Netfilter', 'NAT'],
-    parts: ['Topologies Cisco', 'ACL', 'Pare-feu iptables']
+    tags: ['Cisco IOS', 'Packet Tracer', 'VLSM', 'OSPF', 'VLAN', 'VTP', 'ACL', 'iptables', 'NAT'],
+    parts: ['Topologies Cisco', 'Routage OSPF', 'ACL', 'Pare-feu iptables']
   },
   {
     id: 'kerberos',
@@ -100,6 +118,21 @@ window.PROJECTS = [
     ],
     tags: ['Kerberos 5', 'KDC', 'SSO', 'TGT / TGS', 'OpenSSH'],
     parts: []
+  },
+  {
+    id: 'defense',
+    featured: true,
+    title: 'Sécurité défensive : pare-feu, forensique, phishing',
+    cats: ['detection'],
+    context: 'Licence 3 · Travaux pratiques de sécurité défensive',
+    summary: "Durcissement d'un pare-feu, analyse forensique d'un disque et campagne de sensibilisation au phishing.",
+    did: [
+      "Durcissement d'un pare-feu pfSense et règles de filtrage iptables",
+      "Analyse forensique d'un disque avec FTK Imager et Autopsy, dont l'étude de la MFT",
+      "Campagne de sensibilisation au phishing avec Gophish"
+    ],
+    tags: ['pfSense', 'iptables', 'FTK Imager', 'Autopsy', 'MFT', 'Gophish'],
+    parts: ['Pare-feu pfSense', 'Forensique disque', 'Sensibilisation phishing']
   },
   {
     id: 'lab-offensif',
